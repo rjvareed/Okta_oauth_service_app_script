@@ -5,20 +5,29 @@ I've been instructed to implement an Okta app that makes API calls, instead of j
 
 This script is meant to be as minimalist as possible and is based on the following guide: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
 
-Basically it is setting up an app to handle the client credentials flow but with Okta as the resource server
+It sets up an app to handle the client credentials flow but with Okta as the resource server
 This script only works on Linux (for now). Requires `python3-jwt` package (`sudo apt install python3-jwt`). Also make sure you have curl and python `sudo apt install curl` `sudo apt install python3`
 
 # Setting up the app in Okta
 
 In admin panel go to `Applications` -> `Create App Integration`
+
 Select `API Services` and hit next
+
 Name the app
+
 Click edit to the right of `Client Credentials`
+
 Next to `Client authentication` check `Public key / Private key`
+
 Make sure `Save keys in Okta` is checked then click `Add key`
+
 Click `Generate new key`
+
 Make sure the private key is in JSON format by clicking the JSON option, then click Copy to clipboard
+
 The private key should look something like:
+
 ```
 {
     "d": "Tmi2hsBHl0BEIe4Mm3RVQhTt0aEdyDklXIfxtYddNPAvvsP62y2Oj-asday-asdMQHc3vHNLhIDZasdD3PW-qK7XEzdasdXMerhwZy4neaG4M5m3hdP2Toh9iiytqo2-HgCNSsY1nmk_SJoHtYQz8F_r362YEpT19W_eVjxrS2Ax0BGMRRYv06Hcht_2cM6hh1bbQMoNObwh14An12KeWtEUcc_H4kZJ0LSxQccEGoK7JHmH9fWsihB-N7A3r4a39gkDBTrF39lxzYwm1YYKWwhFaV0Vq68PMM8Mo06HfzWkPyW81OgHJzwTBjX_0NnRMqBdU1z5w9aiUG539khz8Q",
@@ -35,15 +44,25 @@ The private key should look something like:
 ```
 
 Paste this into a file and save it in the project's root directory as `private_key.jwk`
+
 Click `done`
+
 Click `Save`
+
 Click `Save` again / confirm
+
 Under `General Settings`, click `Edit` and uncheck `Require Demonstrating Proof of Possession (DPoP) header in token requests`
+
 Click `Save`
+
 Next to `Client ID` at the top, copy and paste the client ID into the `client_id` field in the okta.json file in the project's root directory e.g. `  "client_id": "0oau3zlvasdGrN9Pa697cd",`
+
 Copy the okta domain and make sure `okta_domain` field in the okta.json file is set to your Okta domain's full url e.g. `  "okta_domain": "https://integrator-6273166.okta.com",`
+
 Select the `Okta API Scopes` tab and click `Grant` on `okta.apps.read`
+
 Click the `Admin roles` tab and click the `Edit assignments` button
+
 Select the Role `Application Administrator` then click `Save Changes`. You can also make a custom role if you want
 
 Run the script in the script's root directory `./script.sh`
