@@ -1,4 +1,5 @@
-#Purpose
+# Purpose
+
 I've been instructed to implement an Okta app that makes API calls, instead of just using an entire org API token. This is better because it is not tied to a single user. Also allows more security since the token is bound to OAuth scopes (here it will only be able to read apps through `okta.apps.read`). Essentially the script will do the equivalent of the following curl request
 `curl -X GET "https://{YourOktaDomain}/api/v1/apps/" --header "Accept: application/json" --header "Content-Type: application/json" --header "Authorization: SSWS {YourApiToken}"` but through an OAuth client credentials grant
 
@@ -7,7 +8,7 @@ This script is meant to be as minimalist as possible and is based on the followi
 Basically it is setting up an app to handle the client credentials flow but with Okta as the resource server
 This script only works on Linux (for now). Requires `python3-jwt` package (`sudo apt install python3-jwt`). Also make sure you have curl and python `sudo apt install curl` `sudo apt install python3`
 
-#Setting up the app in Okta
+# Setting up the app in Okta
 
 In admin panel go to `Applications` -> `Create App Integration`
 Select `API Services` and hit next
@@ -49,7 +50,7 @@ Run the script in the script's root directory `./script.sh`
 
 TODO: Check: Is DPoP (Demonstrating Proof of Possession) necessary / more secure? How can you implement it?
 
-#High level overview of flow
+# High level overview of flow
 1. Generate a signed JWT. This JWT will last for 300 seconds.
 2. Make a post request to https://{YourOktaDomain}/oauth2/v1/token with the JWT as the client_assertion url parameter
 3. The response will be given as JSON with an access_token parameter. This access token should last for 300 seconds. Save that access token.
