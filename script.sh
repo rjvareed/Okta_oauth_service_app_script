@@ -8,6 +8,6 @@ response=$(curl --location --request POST "$okta_domain/oauth2/v1/token" --heade
 echo -e "$response\n"
 access_token=$(echo $response | jq -r '.access_token')
 echo -e "\x1b\x5b\x33\x31\x6d""Access token=$access_token""\x1b\x5b\x30\x6d"
-echo API response:
+echo -e "Making final request\nAPI response:"
 curl -X GET "$okta_domain/api/v1/apps/" --header "Accept: application/json" --header "Content-Type: application/json" --header "Authorization: Bearer $access_token"
 echo
