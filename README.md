@@ -43,7 +43,7 @@ The private key should look something like:
 }
 ```
 
-Paste this into a file and save it in the project's root directory as `private_key.jwk`
+Paste it into a file and save it in the project's root directory as `private_key.jwk`
 
 Click `done`
 
